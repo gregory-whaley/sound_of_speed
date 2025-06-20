@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+   <meta charset = "utf-8" />
+   <title>WebSocket Test</title>
+
+   <script language = "javascript" type = "text/javascript">
+      var wsUri = "ws://localhost:8888/ws";
+      var output;
+	
+      function init() {
+         output = document.getElementById("output");
+         testWebSocket();
+      }
+	
+      function testWebSocket() {
+         websocket = new WebSocket(wsUri);
+	     websocket.binaryType = "arraybuffer";
+	     
+         websocket.onopen = function(evt) {
+            console.log("Connected to ",wsUri);
+         };
+         
+         websocket.onmessage = function(evt) {
+            var server_message = evt.data;
+            var pre = document.createElement("p"); 
+            
+            console.log("Message Size = ",server_message.byteLength);
+            const view = new DataView(server_message);            
+/*            
+            console.log("first two bytes = ",view.getUint16(0,false));  // big endian
+            for (let i = 2; i < 22; i+=4) {
+               console.log(i,view.getFloat32(i,false))
+            }            
+            console.log("Recvd: ",server_message);
+*/            
+/*
+            pre.style.wordWrap = "break-word"; 
+            pre.innerHTML = server_message; 
+            output.appendChild(pre);
+*/
+         }
+            
+         websocket.onclose = function(){
+            console.log("Connection Closed");
+            websocket.close();
+            }
+      }
+	
+      window.addEventListener("load", init, false);
+   </script>
+
+
+
+   <h2>WebSocket Test</h2>
+   <div id = "output"></div>
+
+</html>

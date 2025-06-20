@@ -1,0 +1,151 @@
+notes for configuring new Bookworm Lite OS:
+
+Install Bookworm 32bit OS standard desktop using Rpi Imager with user 'greg', SSH enabled, and connect to WiFi.
+
+After first boot, SSH into change windowing system back to X11 and sound manager to pulseaudio.  Reboot.
+Add VPN daemon.
+
+For my use I set the WiFi to be the extender "xwhaley-plus".  Then set to have a fixed IP address at 192.168.10.50.  The DHCP range for the extender is 192.168.10.100-200 so my static IP will not conflict.  Set DNS and gateways on sos to 192.168.10.1.
+
+Then I set the extender to activate DMZ for 192.168.10.50.  This exposes the sos machine to 10.0.0.201 which is the reserved IP for the extender.  So I can ssh into 10.0.0.201 as the sos machine.
+
+------
+
+
+- raspios firewalls have only port 22 open by default.  Install ufw utility with:
+sudo apt install ufw
+
+ufw will overwrite existing firewall setting including ssh port so always include port 22 to allow list.  Port 5900 is needed for VNC use also.  You must add /tcp to any command line with multiple ports.
+- To open port 80, 443, 5900, and 22:
+sudo ufw allow 22,80,443,5900/tcp
+
+To allow the tornado websocket server to serve outside localhost, port 8888 also needs to be opened.
+sudo ufw allow 8888
+
+to allow MQTT service, open port 1883 for TCP sockets and 8889 for websockets.
+sudo ufw allow 1883, 8889/tcp
+
+to allow ZMQ service, open port 5556:
+sudo ufw allow 5556
+
+so the complete allow command is:
+sudo ufw allow 22,80,443,1883,5556,5900,8888,8889/tcp
+
+Finally enable ufw with the command:
+sudo ufw enable
+
+-----------
+- Update apt
+sudo apt update
+
+-------------
+- First install pip3:
+sudo apt install python3-pip
+
+--------------
+Create python virtual environment.
+
+
+-------------
+
+
+- Install tornado libraries.  Tornado is a special install since it wants to be installed in a venv.  To install system wide:
+sudo apt install python3-tornado
+
+
+- The tornado webapp will be configured for the bridge function only.
+- Found a memory leak bug when using the write_message() method in a different thread from the main polling loop??.  The problem goes away when using tornado version 4.5.3.
+
+installation command (works for ubuntu system-wide, pi requires venv):
+pip install 'tornado==4.5.3'
+
+I could not get tornado4.5.3 to install using "apt install python3-tornado..." and so had to clone the entire repo from github: 
+git clone  https://github.com/tornadoweb/tornado.git
+and then select version 4.5.3:
+git checkout remotes/origin/branch4.5
+and then build from source:
+cd tornado
+python setup.py build
+sudo python setup.py install
+
+I had to fix two syntax errors in two python source files to get it to compile.  Commenting out a line in test/asynchio.py and changing a line in tornado/httputils.py from container.M... to container.abc.M...
+
+this successfully avoids the memory leak.
+
+-------------
+- Install libraries for the ZMQ to Websocket bridge:
+sudo apt install python3-zmq
+
+-------------
+Install sounddevice python module:
+pip install sounddevice --break-system-packages
+
+This is a sounddevice dependency:
+sudo apt install portaudio19-dev
+pip install numpy
+
+-----------
+Install matplotlib:
+pip install matplotlib --break-system-packages
+
+This compile needs lots of RAM and will crash a pi zero.  I increased the swap file to 1024M in /etc/dphys_swapfile.  Reducing the number of CPUs used allows a single thread to use all the RAM rather than sharing the RAM among several CPUs and thus running out of RAM.  Adding "maxcpus=1" to the end of the /boot/firmware/cmdline.txt file and rebooting (not practical for distribution however).
+
+-------
+Install png module:
+pip install pypng --break-system-packages
+
+
+-----------
+Install yaml
+pip install pyyaml --break-system-packages
+
+------------
+Install paho for MQTT support.
+pip install paho-mqtt --break-system-packages
+
+Install mosquitto server:
+sudo apt install mosquitto
+
+to allow for web browser access to MQTT, a websockets listening port at 8889 must be enabled in the mosquitto.conf file located in the /etc/mosquitto/conf.d folder.  The listeners section should have:
+
+listener 1883
+listener 8889
+protocol websockets
+allow_anonymous true
+
+-----------
+- To install apache web server:
+sudo apt install apache2
+
+-------
+
+Configure system control daemon to autostart the tornado web app server.
+
+
+
+
+
+
+
+---------
+
+To enable dynamic DNS, install and configure the noip client
+
+
+----------
+Group and user permission tasks:
+
+To add the group 'sos':
+sudo groupadd sos
+
+to add a user to the group 'sos'
+sudo usermod -a -G sos existingusername
+
+note: group assignments take effect after the user logs in.
+
+to change the folder permissions to the group 'sos':
+sudo chgrp sos /var/www
+
+
+
+

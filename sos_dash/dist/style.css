@@ -1,0 +1,39 @@
+html, body {
+  height: 100%;
+}
+h1 {
+  text-align: center;
+}
+canvas {
+
+}
+
+#corr_graph{
+  background: red;
+}
+#pos_overlap{
+  background: blue;
+}
+#neg_overlap{
+  background: green;
+}
+#recent_data {
+  /*border:1px solid black;*/
+  /*background: white;*/
+  text-align:center;
+  th, td {
+    padding-left: 20px;
+  }
+}
+#master_table {
+  width:100%;  
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto
+}
+table {
+  /*border:1px solid black;*/
+}
+#master_table_title {
+  font-size:125%;
+}

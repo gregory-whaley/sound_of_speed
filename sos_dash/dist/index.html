@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>SoS Dash</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>SoS Dashboard</h1>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+<table id="master_table">
+  <tr id="master_table_title">
+    <th>Correlation</th>
+    <th>Positive Overlap</th>
+    <th>Negative Overlap</th>
+    <th>Recent Measurements</th>
+  </tr>
+  <tr>
+    <td><canvas id="corr_graph" width="200" height="350"></canvas></td>
+    <td><canvas id="pos_overlap" width="100" height="350"></canvas></td>
+    <td><canvas id="neg_overlap" width="100" height="350"></canvas></td>
+    <td valign="top">
+      <table id="recent_data"; align="center">
+        <tr>
+          <th>Date</th>
+          <th>Speed</th>
+        </tr>
+        <tr>
+          <td>4/18/25 3:45</td>
+          <td>34.3 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:48</td>
+          <td>32.1 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:45</td>
+          <td>34.3 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:48</td>
+          <td>32.1 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:45</td>
+          <td>34.3 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:48</td>
+          <td>32.1 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:45</td>
+          <td>34.3 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:48</td>
+          <td>32.1 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:45</td>
+          <td>34.3 MPH</td>
+        </tr>
+        <tr>
+          <td>4/18/25 3:48</td>
+          <td>32.1 MPH</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
