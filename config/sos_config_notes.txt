@@ -47,6 +47,7 @@ Create python virtual environment.
 cd to ~/sos
 python3 -m venv .sos_venv       # the dot keeps the subfolder hidden
 
+to run a script using the venv without activating, use /home/greg/sos/.sos_venv/bin/python3 from anywhere.
 -------------
 
 
@@ -124,10 +125,15 @@ sudo apt install apache2
 
 -------
 
-Configure system control daemon to autostart the tornado web app server.
+Configure system control daemon to autostart the sos.py app, and the tornado web app server.
 
+sos.service file is put in /etc/systemd/system
+enable the service for automatic loading upon boot with:
+sudo systemctl enable sos.service
 
-
+zmq_ws_bridge.service file is put in /etc/systemd/system
+enable the service for automatic loading upon boot with:
+sudo systemctl enable zmq_ws_bridge.service
 
 
 

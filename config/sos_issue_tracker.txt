@@ -4,13 +4,14 @@
     Status: open
     tasks:
     - try to replicate on another Pi system?
+    - raspian lite does not install pulseaudio or pipewire by default.  It is needed for GUI desktop versions.
       
 002: ZMQ library has memory leak.
     status: open
     tasks:
     -  wait for Ben to resolve.
     -  use workaround with version 4 of ZMQ.
-    -  figure out how to use bridge code under venv with a systemctl service.
+    -  figure out how to use bridge code under venv with a systemctl service.  Call /home/greg/sos/.sos_venv/bin/python3 from anywhere.
     
     
 003: ZMQ bridge connects only to open ZMQ publisher.  Should poll to see when publisher starts.
@@ -23,3 +24,6 @@
     tasks:
     - add charts to html code.
     - add chart generation to service script.
+    
+005:  Get tornado to serve static files including index.html.  This avoids needing apache.
+    status: open
