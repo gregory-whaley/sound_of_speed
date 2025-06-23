@@ -1,0 +1,25 @@
+#  Open issue tracking list for SoS.
+
+001: pulseaudio crashes after several days of use.
+    Status: open
+    tasks:
+    - try to replicate on another Pi system?
+      
+002: ZMQ library has memory leak.
+    status: open
+    tasks:
+    -  wait for Ben to resolve.
+    -  use workaround with version 4 of ZMQ.
+    -  figure out how to use bridge code under venv with a systemctl service.
+    
+    
+003: ZMQ bridge connects only to open ZMQ publisher.  Should poll to see when publisher starts.
+    status: open
+    tasks:
+    - add code to poll for valid ZMQ host on localhost.
+    
+004:  Add charting features to SoS Dashboard.
+    status: open
+    tasks:
+    - add charts to html code.
+    - add chart generation to service script.

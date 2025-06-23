@@ -44,14 +44,19 @@ sudo apt install python3-pip
 
 --------------
 Create python virtual environment.
-
+cd to ~/sos
+python3 -m venv .sos_venv       # the dot keeps the subfolder hidden
 
 -------------
 
 
-- Install tornado libraries.  Tornado is a special install since it wants to be installed in a venv.  To install system wide:
+- Install tornado libraries.  Tornado is a special install since it wants to be installed in a venv.  
+To install system wide:
 sudo apt install python3-tornado
-
+or use the venv:
+cd ~/sos
+source .sosvenv/bin/activate
+pip install tornado
 
 - The tornado webapp will be configured for the bridge function only.
 - Found a memory leak bug when using the write_message() method in a different thread from the main polling loop??.  The problem goes away when using tornado version 4.5.3.
