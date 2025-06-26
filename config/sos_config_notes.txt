@@ -35,6 +35,11 @@ Finally enable ufw with the command:
 sudo ufw enable
 
 -----------
+create sos user acccount??:
+
+
+
+-----------
 - Update apt
 sudo apt update
 
@@ -80,7 +85,8 @@ this successfully avoids the memory leak.
 
 -------------
 - Install libraries for the ZMQ to Websocket bridge:
-sudo apt install python3-zmq
+sudo apt install python3-zmq     # if system-wide
+pip install zmq           # if in venv
 
 -------------
 Install sounddevice python module:

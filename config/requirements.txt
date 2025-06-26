@@ -1,0 +1,10 @@
+# required python modules
+numpy
+tornado==4.5.3
+zmq
+sounddevice 
+matplotlib      # may not compile on pi zeros due to low memory.
+pypng
+pyyaml
+paho-mqtt
+
