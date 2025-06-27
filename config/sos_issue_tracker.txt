@@ -27,3 +27,15 @@
     
 005:  Get tornado to serve static files including index.html.  This avoids needing apache.
     status: open
+    
+006:  ufw install stops for asking if update is ok.
+        status: fixed with --force option
+
+007:  both services fail to start.
+        status: fixed
+        script only enables services and will start automatically after reboot.
+        
+008:  add web site support to install script.
+        status: open
+        
+            

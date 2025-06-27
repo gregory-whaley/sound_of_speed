@@ -7,7 +7,7 @@ set -x          # Debugging
 set -e          # exit installation if anything fails
 exec > >(tee -i installation-$(date +%F).txt) 2>&1          # Make log file
 
-BASE_DIR=$HOME/Documents/sos_master
+BASE_DIR=$HOME/sos_master
 export BASE_DIR=$BASE_DIR
 
 cd $BASE_DIR || exit 1
@@ -20,7 +20,7 @@ if  ! which ufw &> /dev/null; then
 fi
 sudo ufw allow 22,80,443,1883,8888,8889/tcp
 #  22=ssh, 80 and 443 = web, 1883 = MQTT, 8888 & 8889 = websockets
-sudo ufw enable
+sudo ufw --force enable
 
 
 # install pip3:
@@ -41,13 +41,21 @@ if  ! which apache2 &> /dev/null; then
    sudo apt install -y apache2
 fi
 
+# install portaudio library needed by sounddevice python module
+if dpkg --status portaudio19-dev &>/dev/null; then
+   echo "portaudio19-dev is installed."
+else
+   echo "portaudio19-dev is not installed."
+   sudo apt install -y portaudio19-dev
+fi
+
 # create python virtual environment
 cd $BASE_DIR || exit 1
 python3 -m venv .sos_venv       # the dot keeps the subfolder hidden
 source ./.sos_venv/bin/activate
 
 # install needed python modules
-#pip3 install -U -r $BASE_DIR/config/requirements.txt   #  -U upgrades the module if already present on system
+pip3 install -U -r $BASE_DIR/config/requirements.txt   #  -U upgrades the module if already present on system
 
 
 # install system services:

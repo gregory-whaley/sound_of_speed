@@ -18,7 +18,7 @@ fi
 #
 # clone the repository to a local user directory and execute install script
 #git clone -b "master" --depth=1 https://github.com/my_git_location.git ${HOME}/sos_master &&
-$HOME/Documents/sos_master/config/install.sh
+$HOME/sos_master/config/install.sh
 #
 if [ ${PIPESTATUS[0]} -eq 0 ];then
   echo "Installation completed successfully"
