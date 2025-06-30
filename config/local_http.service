@@ -1,0 +1,20 @@
+[Unit]
+Description=Local HTTP service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=dummy_user
+WorkingDirectory=dummy_directory/sos_dash/dist
+ExecStart=dummy_directory/.sos_venv/bin/python3 -m http.server 80
+
+StandardError=journal
+StandardOutput=journal
+StandardInput=null
+
+
+[Install]
+WantedBy=multi-user.target

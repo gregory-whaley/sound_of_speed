@@ -37,9 +37,9 @@ fi
 #sudo systemctl restart mosquitto.service
 
 # install apache web server
-if  ! which apache2 &> /dev/null; then
-   sudo apt install -y apache2
-fi
+#if  ! which apache2 &> /dev/null; then
+#   sudo apt install -y apache2
+#fi
 
 # install portaudio library needed by sounddevice python module
 if dpkg --status portaudio19-dev &>/dev/null; then
@@ -70,6 +70,10 @@ sudo sed -i 's^dummy_user^'$USER'^' /etc/systemd/system/zmq_bridge.service
 sudo sed -i 's^dummy_directory^'$BASE_DIR'^g' /etc/systemd/system/zmq_bridge.service
 sudo systemctl enable zmq_bridge.service
 
+sudo cp $BASE_DIR/config/local_http.service /etc/systemd/system
+sudo sed -i 's^dummy_user^'$USER'^' /etc/systemd/system/local_http.service
+sudo sed -i 's^dummy_directory^'$BASE_DIR'^g' /etc/systemd/system/local_http.service
+sudo systemctl enable local_http.service
 
 
 exit 0     # no errors if we made it this far
