@@ -1,6 +1,6 @@
 # required python modules
 numpy
-tornado==4.5.3
+tornado==4.5.3   # version required due to memory leak bug
 zmq
 sounddevice 
 matplotlib      # may not compile on pi zeros due to low memory.

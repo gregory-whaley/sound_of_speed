@@ -38,16 +38,18 @@ con.close()
 
 
 fig,ax1 = plt.subplots(figsize=(10,6))
-ax1.bar(date_list,speed_counts,color='lightgrey')
+ax1.bar(date_list,speed_counts,color='lightgrey',label='Daily Count')
 ax1.set_xlabel('Date',fontsize=14)
 ax1.set_ylabel('Volume (Cars/Day)',fontsize=14)
 ax1.set_title('Traffic Volume and Average Speed',fontsize=18)
 
 
 ax2 = ax1.twinx()     # generate 2nd plot with same x-axis
-ax2.plot(date_list,speed_list,color='firebrick')
+ax2.plot(date_list,speed_list,color='firebrick',label='Ave. Speed')
 ax2.grid(True)
 ax2.set_ylabel('Average Speed (MPH)',fontsize=14)
+
+fig.legend(loc='best')
 
 fig.savefig('totals_by_day.png',dpi=100)
 #plt.show()

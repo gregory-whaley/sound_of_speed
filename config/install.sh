@@ -71,7 +71,6 @@ sudo sed -i 's^dummy_directory^'$BASE_DIR'^g' /etc/systemd/system/zmq_bridge.ser
 sudo systemctl enable zmq_bridge.service
 
 sudo cp $BASE_DIR/config/local_http.service /etc/systemd/system
-sudo sed -i 's^dummy_user^'$USER'^' /etc/systemd/system/local_http.service
 sudo sed -i 's^dummy_directory^'$BASE_DIR'^g' /etc/systemd/system/local_http.service
 sudo systemctl enable local_http.service
 

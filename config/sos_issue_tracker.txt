@@ -15,9 +15,10 @@
     
     
 003: ZMQ bridge connects only to open ZMQ publisher.  Should poll to see when publisher starts.
-    status: open
+    status: closed
     tasks:
     - add code to poll for valid ZMQ host on localhost.
+    - could not replicate issue with ZMQ version 4.3.4.
     
 004:  Add charting features to SoS Dashboard.
     status: open
@@ -33,7 +34,7 @@
         status: done
         - fixed with --force option
 
-007:  both services fail to start.
+007:  services fail to start.
         status: done
         script only enables services and will start automatically after reboot.
         

@@ -7,9 +7,9 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=dummy_user
+User=root
 WorkingDirectory=dummy_directory/sos_dash/dist
-ExecStart=dummy_directory/.sos_venv/bin/python3 -m http.server 80
+ExecStart=python3 -m http.server 80
 
 StandardError=journal
 StandardOutput=journal

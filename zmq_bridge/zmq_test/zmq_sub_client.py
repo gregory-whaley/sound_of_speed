@@ -7,6 +7,6 @@ socket.setsockopt(zmq.SUBSCRIBE, b"")   # this is required even if there is no f
 
 while True:
     message = socket.recv()
-    print("Len: ",len(message))
-    print(f"Recv: {message.hex()}")
-
+    print("Received Len: ",len(message))
+    print(f"Hex: {message.hex()}")
+    print("Message: ",message)

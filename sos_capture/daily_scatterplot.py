@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
 import numpy as np
 import sqlite3
 from datetime import datetime
@@ -75,9 +76,9 @@ fig = plt.figure(figsize=(10,6))
 
 # Create the main Axes, leaving 25% of the figure space at the top and on the
 # right to position marginals.
-ax = fig.add_gridspec(top=0.75, right=0.75).subplots()
-# The main Axes' aspect can be fixed.
-#ax.set(aspect=1)
+gs = GridSpec(1,1, figure=fig, top=0.75, right = 0.75)
+
+ax = fig.add_subplot(gs[0,0])
 
 # Create marginal Axes, which have 25% of the size of the main Axes.  Note that
 # the inset Axes are positioned *outside* (on the right and the top) of the
