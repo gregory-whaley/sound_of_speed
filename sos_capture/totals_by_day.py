@@ -49,7 +49,7 @@ ax2.plot(date_list,speed_list,color='firebrick',label='Ave. Speed')
 ax2.grid(True)
 ax2.set_ylabel('Average Speed (MPH)',fontsize=14)
 
-fig.legend(loc='best')
+fig.legend(loc='upper right')
 
 fig.savefig('totals_by_day.png',dpi=100)
 #plt.show()

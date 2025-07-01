@@ -8,8 +8,6 @@ const POS_CTX = POS_CVS.getContext('2d');
 const NEG_CVS = document.getElementById('neg_overlap')
 const NEG_CTX = NEG_CVS.getContext('2d');
 
-//var wsURL = "ws://localhost:8888/ws"; // URL for the websocket server
-//var wsURL = "ws://10.0.0.136:8888/ws"; // URL for the websocket server
 var wsURL = "ws://"+self.location.hostname+":8888/ws";
 
 const DATA = new Float32Array(400);
@@ -105,8 +103,9 @@ function initWebSocket(){
 
 }//init
 
+const MQTT_URL = "ws://"+self.location.hostname+":8889";
 // Open the MQTT feed through websockets
-const client = mqtt.connect('ws://10.0.0.201:8889', {
+const client = mqtt.connect(MQTT_URL, {
   clientId: Math.floor(Math.random() * 100000).toString(),
   username: '',
   password: '',

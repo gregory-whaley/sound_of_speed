@@ -51,7 +51,9 @@ fi
 
 # create python virtual environment
 cd $BASE_DIR || exit 1
-python3 -m venv .sos_venv       # the dot keeps the subfolder hidden
+if ! [ -d .sos_venv ]; then
+   python3 -m venv .sos_venv       # generate venv; the dot keeps the subfolder hidden
+fi
 source ./.sos_venv/bin/activate
 
 # install needed python modules
@@ -73,6 +75,17 @@ sudo systemctl enable zmq_bridge.service
 sudo cp $BASE_DIR/config/local_http.service /etc/systemd/system
 sudo sed -i 's^dummy_directory^'$BASE_DIR'^g' /etc/systemd/system/local_http.service
 sudo systemctl enable local_http.service
+
+cp -p $BASE_DIR/config/generate_plots_template.sh $BASE_DIR/sos_capture/generate_plots.sh
+sed -i 's^dummy_directory^'$BASE_DIR'^g' $BASE_DIR/sos_capture/generate_plots.sh
+cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/daily_scatterplot.png
+cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/totals_by_day.png
+cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/histograms_by_day.png
+
+
+sudo cp $BASE_DIR/config/sos_cron /etc/cron.d/
+sudo sed -i "s^dummy_user^"$USER"^g" /etc/cron.d/sos_cron
+sudo sed -i "s^dummy_directory^"$BASE_DIR"^g" /etc/cron.d/sos_cron
 
 
 exit 0     # no errors if we made it this far

@@ -1,0 +1,6 @@
+#sos_cron
+# runs at one minute after midnight every day
+01 0 * * * dummy_user dummy_directory/sos_capture/generate_plots.sh
+#
+#remember to put a c/r as the last line.
+
