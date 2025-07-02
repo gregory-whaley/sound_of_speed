@@ -6,11 +6,11 @@
     - try to replicate on another Pi system?
     - raspian lite does not install pulseaudio or pipewire by default.  It is needed for GUI desktop versions.
       
-002: ZMQ library has memory leak.
+002: tornado library has memory leak.
     status: open
     tasks:
     -  wait for Ben to resolve.
-    -  use workaround with version 4 of ZMQ.
+    -  use workaround with version 4.5.3 of tornado.  Must compile from source and fix two source bugs.
     -  figure out how to use bridge code under venv with a systemctl service.  Call /home/greg/sos/.sos_venv/bin/python3 from anywhere.
     
     
@@ -18,7 +18,7 @@
     status: closed
     tasks:
     - add code to poll for valid ZMQ host on localhost.
-    - could not replicate issue with ZMQ version 4.3.4.
+    - could not replicate issue with ZMQ version 4.3.5.
     
 004:  Add charting features to SoS Dashboard.
     status: open

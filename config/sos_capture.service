@@ -9,7 +9,7 @@ Restart=always
 RestartSec=1
 User=dummy_user
 WorkingDirectory=dummy_directory/sos_capture
-ExecStart=dummy_directory/.sos_venv/bin/python3 sos_capture.py
+ExecStart=dummy_directory/.sos_venv/bin/python3 sos.py
 #ExecStart=dummy_directory/.sos_venv/bin/python3 test/service_test.py
 
 StandardError=journal
