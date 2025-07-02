@@ -77,7 +77,7 @@ sed -i 's^dummy_directory^'$BASE_DIR'^g' $BASE_DIR/sos_capture/generate_plots.sh
 cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/daily_scatterplot.png
 cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/totals_by_day.png
 cp $BASE_DIR/config/no_data.png $BASE_DIR/sos_capture/histograms_by_day.png
-
+ln /home/greg/sos_master/sos_capture/*.png /home/greg/sos_master/sos_dash/dist/
 
 sudo cp $BASE_DIR/config/sos_cron /etc/cron.d/
 sudo sed -i "s^dummy_user^"$USER"^g" /etc/cron.d/sos_cron
