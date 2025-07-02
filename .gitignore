@@ -1,4 +1,3 @@
 .sos_venv/
 installation*
-*.png
 *.db
