@@ -33,13 +33,9 @@ if  ! which mosquitto &> /dev/null; then
    sudo apt install -y mosquitto
 fi
 # add mosquitto config file for serving MQTT port 1883 and Websocket port 8889
-#sudo cp $BASE_DIR/config/sos_mosquitto.config /etc/mosquitto/conf.d/
-#sudo systemctl restart mosquitto.service
+sudo cp $BASE_DIR/config/sos_mosquitto.config /etc/mosquitto/conf.d/
+sudo systemctl restart mosquitto.service   # previously enabled, so not needed if reboot happens
 
-# install apache web server
-#if  ! which apache2 &> /dev/null; then
-#   sudo apt install -y apache2
-#fi
 
 # install portaudio library needed by sounddevice python module
 if dpkg --status portaudio19-dev &>/dev/null; then

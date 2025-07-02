@@ -129,6 +129,9 @@ allow_anonymous true
 - To install apache web server:
 sudo apt install apache2
 
+
+alternate to installing apache:  use python3 module http.server in a service file by:
+python3 -m http.server 80
 -------
 
 Configure system control daemon to autostart the sos.py app, and the tornado web app server.
@@ -163,6 +166,11 @@ note: group assignments take effect after the user logs in.
 to change the folder permissions to the group 'sos':
 sudo chgrp sos /var/www
 
+---------------------------------------
 
+git clone command to local repository:
+git clone ssh://greg@ubuntu20.local/~/Documents/sos_master/.git
+
+-------------------------------------------
 
 
