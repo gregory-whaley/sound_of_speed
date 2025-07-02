@@ -9,8 +9,8 @@ Restart=always
 RestartSec=1
 User=dummy_user
 WorkingDirectory=dummy_directory/zmq_bridge
-#ExecStart=dummy_directory/.sos_venv/bin/python3 zmq_ws_bridge.py
-ExecStart=dummy_directory/.sos_venv/bin/python3 zmq_test/service_test.py
+ExecStart=dummy_directory/.sos_venv/bin/python3 zmq_ws_bridge.py
+#ExecStart=dummy_directory/.sos_venv/bin/python3 zmq_test/service_test.py
 
 StandardError=journal
 StandardOutput=journal
