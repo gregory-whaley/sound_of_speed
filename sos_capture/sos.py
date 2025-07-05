@@ -208,11 +208,13 @@ if not os.path.isfile(db_filename):
 
 # list ALSA devices and select the direct hardware port
 for item in sd.query_devices():
-    #print('Device Name: ',item['name'],'   Index:',item['index'])
-    #print(item)
-    if audio_input_selector in item['name']:
-        print('Found ',audio_input_selector,' in item #',item['index'])
+    if (audio_input_selector in item['name']) and (item['max_input_channels']==2):
+        print('Found ',item['name'])
         input_num=item['index']
+        break
+    else: 
+        print('Error...No stereo audio input found.')
+        sys.exit(1)
 
 def save_results(speed, peak):
     global speed_result, peak_result, result_ready
