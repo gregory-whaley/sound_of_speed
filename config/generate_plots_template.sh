@@ -14,5 +14,4 @@ dummy_directory/.sos_venv/bin/python3  dummy_directory/sos_capture/histograms_by
 # generate bar chart of daily stats
 dummy_directory/.sos_venv/bin/python3  dummy_directory/sos_capture/totals_by_day.py
 #
-# move new images to web server folder
-cp *.png dummy_directory/sos_dash/dist/
+

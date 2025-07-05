@@ -171,7 +171,7 @@ sudo chgrp sos /var/www
 git clone command to local repository:
 git clone ssh://greg@ubuntu20.local/~/Documents/sos_master/.git
 
-update repo without cloning:
+update local repo without cloning:
 git pull ssh://greg@ubuntu20.local/~/Documents/sos_master/.git
 -------------------------------------------
 
