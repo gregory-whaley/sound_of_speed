@@ -25,7 +25,7 @@ sudo ufw --force enable
 
 # install pip3:
 if  ! which pip3 &> /dev/null; then
-   sudo apt install python3-pip
+   sudo apt install -y python3-pip
 fi
 
 #Install mosquitto server:
