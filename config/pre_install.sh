@@ -17,7 +17,8 @@ if  ! which git &> /dev/null; then
 fi
 #
 # clone the repository to a local user directory and execute install script
-git clone -b "master" ssh://greg@ubuntu20.local/~/Documents/sos_master/.git ${HOME}/sos_master &&
+git clone -b "master" ssh://greg@ubuntu20.local/~/Documents/sos_master/.git ${HOME}/sos_master
+
 $HOME/sos_master/config/install.sh
 #
 if [ ${PIPESTATUS[0]} -eq 0 ];then

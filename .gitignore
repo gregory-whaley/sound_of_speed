@@ -1,3 +1,5 @@
 .sos_venv/
 installation*
 *.db
+sos_master.code-workspace
+
