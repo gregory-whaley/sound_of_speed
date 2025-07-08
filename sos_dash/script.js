@@ -138,16 +138,3 @@ client.on('close',()=>{console.log('MQTT closed')});
 window.addEventListener("load", initWebSocket, false);  //add event handler
 
 
-
-
-
-
-
-/*
-for (let i = 0; i < 100; i++){
-  fillRandData();
-  paintScroll(CORR_CTX, correlationMap, DATA);
-  paintScroll(POS_CTX, overlapMap, DATA);
-  paintScroll(NEG_CTX, overlapMap, DATA);
-}
-*/
