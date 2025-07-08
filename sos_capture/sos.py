@@ -48,12 +48,6 @@ db_filename = 'speed.db'
 if 'db_filename' in parms:
     db_filename = parms['db_filename']
 
-# num_vectors = 100   # number of vectors to store for historical analysis
-# if 'num_vectors' in parms:
-#     temp = int(parms['num_vectors'])
-#     if temp >=20 and temp <= 1000:
-#         num_vectors = temp
-
 
 
 mic_spacing = 0.53       # microphone spacing in meters
