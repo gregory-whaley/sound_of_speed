@@ -1,6 +1,6 @@
-<!-- Update the logo URL to point to github -->
 
-<h1 align="center"> <img src="https://raw.githubusercontent.com/gregory-whaley/sound_of_speed/sos_master/sos_dash/images/sos_logo.png)" width="200"/></h1>
+
+<h1 align="center"> <img src="sos_dash/images/sos_logo.png" width="200"/></h1>
 <h1 align="center">Speed of Sound</h1>
 
 Automobile traffic monitor using acoustic microphones and Raspberry Pi Zero 2W, 3A or B, 4 or 5.
@@ -47,8 +47,9 @@ The script will collect and install all the required libraries and then reboot. 
 http://hostname.local/
 ```
 where `hostname` is the name of the computer assigned with the OS install.  Note that `https://` is not supported at this time.  Here is a screenshot of an example measurement:
-![Example Screenshot](https://raw.githubusercontent.com/gregory-whaley/sound_of_speed/sos_master/sos_dash/images/example_dash.png)
-<!-- Update the image URL to point to github -->
+![Example Screenshot](sos_dash/images/example_dash.png)
+
+The Correlation plot shows the angle of the sound sources, the overlap plots show the results of the vehicle detection scoring algorithm.  A peak in the detection score signifies an "event" and a speed measurement is computed from the peak.
 
 
 ### Initial Configuration
