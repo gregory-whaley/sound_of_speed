@@ -1,7 +1,7 @@
 
 
 <h1 align="center"> <img src="sos_dash/images/sos_logo.png" width="200"/></h1>
-<h1 align="center">Speed of Sound</h1>
+<h1 align="center">Sound of Speed</h1>
 
 Automobile traffic monitor using acoustic microphones and Raspberry Pi Zero 2W, 3A or B, 4 or 5.
 
