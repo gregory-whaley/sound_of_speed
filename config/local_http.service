@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-WorkingDirectory=dummy_directory/sos_dash/dist
+WorkingDirectory=dummy_directory/sos_dash/
 ExecStart=python3 -m http.server 80
 
 StandardError=journal
