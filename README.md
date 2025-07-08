@@ -39,7 +39,7 @@ The computer should list all available audio input devices including the intende
 Once the computer is configured with network access, open an SSH shell into the computer and execute the following install script from the user directory:
 
 ```shell
-curl -s https://raw.githubusercontent.com/gregory-whaley/sound_of_speed/sos_master/config/pre_installer.sh | bash
+curl -s https://raw.githubusercontent.com/gregory-whaley/sound_of_speed/master/config/pre_install.sh | bash
 ```
 
 The script will collect and install all the required libraries and then reboot.  The Sound of Speed system automatically starts upon booting.
