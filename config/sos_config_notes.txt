@@ -161,7 +161,7 @@ sudo groupadd sos
 to add a user to the group 'sos'
 sudo usermod -a -G sos existingusername
 
-note: group assignments take effect after the user logs in.
+note: group assignments take effect after the user logs in.
 
 to change the folder permissions to the group 'sos':
 sudo chgrp sos /var/www
@@ -176,6 +176,10 @@ git pull ssh://greg@ubuntu20.local/~/Documents/sos_master/.git
 
 local command to get the install script:
 rsync greg@ubuntu20.local:~/Documents/sos_master/config/pre_install.sh .
+
+git command to push local repo to Github:
+git push https://github.com/gregory-whaley/sound_of_speed/ master
+have personal access token at the ready.
 
 -------------------------------------------
 

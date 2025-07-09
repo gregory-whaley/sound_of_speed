@@ -1,10 +1,10 @@
 #  Open issue tracking list for SoS.
 
 001: pulseaudio crashes after several days of use.
-    Status: open
+    Status: closed
     tasks:
     - try to replicate on another Pi system?
-    - raspian lite does not install pulseaudio or pipewire by default.  It is needed for GUI desktop versions.
+    - raspian lite does not install pulseaudio or pipewire by default.  It is needed for GUI desktop versions. Solution is to use Raspian Lite.
       
 002: tornado library has memory leak.
     status: open
