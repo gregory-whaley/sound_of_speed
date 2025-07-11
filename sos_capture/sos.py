@@ -228,8 +228,8 @@ def output_results():
     
     outstr = date_str + "  " + speed_str + " MPH  Peak: " + peak_str
     print(outstr)
-    mqtt.single("/SoS/speed",abs(speed_result))
-    mqtt.single("/SoS/velocity",speed_result)
+    mqtt.single("/SoS/speed",str(abs(speed_result)))     # MQTT function has a problem with sending floats, so string instead
+    mqtt.single("/SoS/velocity",str(speed_result))
     mqtt.single("/SoS/log",outstr)
     con = sqlite3.connect(db_filename)
     db_cursor = con.cursor()
