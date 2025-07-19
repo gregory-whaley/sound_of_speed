@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 # my version of a bridge with ZMQ subscriber feeding websockets.
+
+#  Updated 19jul25 to implement zmq message handling inside the asyncio event loop,
+#  so now both tornado websocket and zmq handling are managed by the one tornado (asyncio) event loop.
 #
-import tornado.ioloop
 import tornado.websocket
 import tornado.web
 import asyncio
-import zmq
-import threading
-import time
+import zmq.eventloop.future
 import sys
 import array
 
-zmq_pub_host = "tcp://127.0.0.1:5556"
+zmq_pub_host = "tcp://localhost:5556"
 
 
 class BridgeWebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -36,21 +36,18 @@ class BridgeWebSocketHandler(tornado.websocket.WebSocketHandler):
     @classmethod
     def send_to_ws(cls, message):
         for handler in cls.instances:
-            handler.write_message(message,binary=True)    # this seems to have a memory leak
- #           print("frame length = ",len(message))
+            handler.write_message(message,binary=True)    
+ 
 
-def zmq_bridge_handler():
+
+async def zmq_bridge_handler(bridge_zmq_socket):
 #  wait for a ZMQ message from the publisher and push it out to all open websockets
-    asyncio.set_event_loop(asyncio.new_event_loop())  # needed to give thread access to event loop
-
+ 
     while True:
-        message = bridge_zmq_socket.recv_multipart()  # type is list of bytes
+        message = await bridge_zmq_socket.recv_multipart()  # return type is list of bytes
         ws_frame = bytearray()      # empty bytearray
         for msg in message:
             ws_frame.extend(msg)     # concatinate bytearrays together into a single frame
-#        print("Frame length = ",len(ws_frame))
-#        print("Message: ",message[0].hex())
-#        print("Frame: ",ws_frame.hex())
         if sys.byteorder == 'little':         # need to convert to big endian to send to ws
             big_endian_array = array.array('f')   # start with empty array of floats in little byte order
             big_endian_array.frombytes(ws_frame)   # load frame in little byte order format
@@ -68,24 +65,28 @@ def zmq_bridge_handler():
 #    the negative overlap array of floats
 #    The overlap array size is calculated by the ws javascript from the frame total minus the delay and int value lengths.
 
-if __name__ == "__main__":
-     # instantiate only one subscriber socket to listen to the publisher
-    zmq_context = zmq.Context()    # this is global in scope
+
+
+async def main():
+    
+    # portion of main to set up zmq socket:
+    # instantiate only one subscriber socket to listen to the publisher
+    zmq_context = zmq.eventloop.future.Context()    # this is an awaitable future object
     bridge_zmq_socket = zmq_context.socket(zmq.SUB)  # instantiate socket object for this ws connection
     bridge_zmq_socket.connect(zmq_pub_host) # assign zmq socket to listen as a SUB to PUB server
-#    connection_closed = bridge_zmq_socket.closed
-#    print(connection_closed)
-#    assert (not connection_closed),"Error...No Publisher Found at "+zmq_pub_host
     bridge_zmq_socket.setsockopt(zmq.SUBSCRIBE, b"")  # subscribe to all feeds
 
-    # Start the zmq handler in a separate thread
-    zmq_thread = threading.Thread(target=zmq_bridge_handler, daemon=True)
-    zmq_thread.start()
+    
+    # Add the zmq handler to the asyncio event queue
+    asyncio.create_task(zmq_bridge_handler(bridge_zmq_socket))    
     
     # instantiate web app using websockethandler
     app = tornado.web.Application([(r"/ws", BridgeWebSocketHandler)])
     app.listen(8888)
+    await asyncio.Event().wait()              # waits here forever as event loop proceeds.
 
-    print("WebSocket server started on port 8888")
-    tornado.ioloop.IOLoop.current().start()
+
+print("WebSocket server started on port 8888")
+if __name__ == "__main__":
+    asyncio.run(main())
 

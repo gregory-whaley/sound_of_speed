@@ -25,4 +25,4 @@ while True:
     i+=1
     if (i % 100) == 0: print(i, end=' ')
     if (i % 1000) == 0: print()
-    time.sleep(1)        
+    time.sleep(0.001)        
