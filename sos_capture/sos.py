@@ -182,13 +182,9 @@ result_ready = False
 
 
 
-def find_peak(x, y):        # compute peak from quadratic interpolation curve
-    A=(x[0]-x[1])*(x[0]-x[2])
-    B=(x[1]-x[0])*(x[1]-x[2])
-    C=(x[2]-x[0])*(x[2]-x[1])
-    num=y[0]*(x[1]+x[2])*B*C + y[1]*(x[0]+x[2])*A*C + y[2]*(x[0]+x[1])*A*B
-    den=y[0]*B*C + y[1]*A*C + y[2]*A*B
-    return num/(2*den)
+def find_peak(x, y):        # compute peak from 2nd order polynomial fit
+    [C,B,A] = np.polynomial.polynomial.polyfit(x,y,2)
+    return -B/(2*A)
     
 
 # initialize sqlite3 database if needed.
@@ -296,8 +292,8 @@ def audio_callback(indata, frames, time, status):  # parameters are local to cal
         k=(frame_ptr+num_frames-j) % num_frames       # k points to the frame with the global peak
         i=np.argmax(p_sum[k])       # i points to the speed in the speed buffer of the global peak
         p_speed_result=speed[i]
-        if (i>0) and (i<num_speeds-1):
-           p_speed_result=find_peak(speed[i-1:i+2],p_sum[k][i-1:i+2])       
+        if (i>1) and (i<num_speeds-1):
+           p_speed_result=find_peak(speed[i-2:i+2],p_sum[k][i-2:i+2])       
         p_found = 5                                            #begin countdown to skip next few frames
         save_results(p_speed_result/0.447,p_peak[j])      # scale speed into MPH
 
@@ -311,8 +307,8 @@ def audio_callback(indata, frames, time, status):  # parameters are local to cal
         k=(frame_ptr+num_frames-j) % num_frames       # k points to the frame with the global peak
         i=np.argmax(n_sum[k])       # i points to the speed in the speed buffer of the global peak
         n_speed_result=speed[i]
-        if (i>0) and (i<num_speeds-1):
-           n_speed_result=find_peak(speed[i-1:i+2],n_sum[k][i-1:i+2])  # this lane is the other lane
+        if (i>1) and (i<num_speeds-1):
+           n_speed_result=find_peak(speed[i-2:i+2],n_sum[k][i-2:i+2])  # this lane is the other lane
         n_found = 5                                            #begin countdown to skip next few frames
         save_results(-n_speed_result/0.447,n_peak[j])      # scale speed into MPH
 
